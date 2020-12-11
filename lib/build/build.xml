@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup Label="ProjectConfigurations">
+        <ProjectConfiguration Include="Win32">
+            <Platform>Win32</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="x64">
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+    </ItemGroup>
+    <PropertyGroup Condition="'$(Platform)'==''">
+        <Platform>x64</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Platform)'=='Win32'">
+        <PlatformDir>x86</PlatformDir>
+        <TargetMachine>MachineX86</TargetMachine>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Platform)'=='x64'">
+        <PlatformDir>x64</PlatformDir>
+        <TargetMachine>MachineX64</TargetMachine>
+    </PropertyGroup>
+    <UsingTask TaskName="LIB" AssemblyFile="$(VCTargetsPath)Microsoft.Build.CppTasks.Common.dll"/>
+    <Target Name="MakeLib">
+        <!--
+            Specify 'Sources="/def:<filename>"' instead of 'ModuleDefinitionFile="<filename>"' to avoid errors
+        -->
+        <LIB
+            Condition="'$(SourceDefinition)'!=''"
+            OutputFile="..\$(PlatformDir)\$(TargetName).lib"
+            TargetMachine="$(TargetMachine)"
+            Sources="/def:$(SourceDefinition)"
+        />
+    </Target>
+    <Target Name="MakeLibAll">
+        <!-- Make LIB files for each definition files -->
+        <MSBuild
+            Projects="$(MSBuildProjectFile)"
+            Properties="SourceDefinition=%(Definition.Identity);TargetName=%(Definition.Filename)"
+            Targets="MakeLib"
+        />
+    </Target>
+    <Target Name="Build" DependsOnTargets="MakeLibAll" />
+
+    <!-- Specify definition files -->
+    <ItemGroup>
+    </ItemGroup>
+    <!-- Specify definition files for x64 only -->
+    <ItemGroup Condition="'$(Platform)'=='x64'">
+        <Definition Include="wslapi.def" />
+    </ItemGroup>
+</Project>

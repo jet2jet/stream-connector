@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{0BC9917F-671B-401B-9B07-180C6853BD40}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>stream-connector</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LibraryPath>$(ProjectDir)lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LibraryPath>$(ProjectDir)lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LibraryPath>$(ProjectDir)lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LibraryPath>$(ProjectDir)lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;wslapi.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>wslapi.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <CustomBuildStep>
+      <Command>msbuild /p:Platform=x64 /v:q "$(ProjectDir)lib\build\build.xml"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)lib\x64\wslapi.lib</Outputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;wslapi.lib;delayimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>wslapi.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+    <CustomBuildStep>
+      <Command>msbuild /p:Platform=x64 /v:q "$(ProjectDir)lib\build\build.xml"</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)lib\x64\wslapi.lib</Outputs>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="source\app\app.h" />
+    <ClInclude Include="source\app\simple_dialog.h" />
+    <ClInclude Include="source\app\window.h" />
+    <ClInclude Include="source\app\worker.h" />
+    <ClInclude Include="source\common.h" />
+    <ClInclude Include="source\connectors\connector.h" />
+    <ClInclude Include="source\connectors\pipe_connector.h" />
+    <ClInclude Include="source\connectors\tcp_socket_connector.h" />
+    <ClInclude Include="source\connectors\unix_socket_connector.h" />
+    <ClInclude Include="source\connectors\wsl_socat_connector_base.h" />
+    <ClInclude Include="source\connectors\wsl_tcp_socket_connector.h" />
+    <ClInclude Include="source\connectors\wsl_unix_socket_connector.h" />
+    <ClInclude Include="source\duplex\duplex.h" />
+    <ClInclude Include="source\duplex\file_duplex.h" />
+    <ClInclude Include="source\duplex\pipe_duplex.h" />
+    <ClInclude Include="source\duplex\socket_duplex.h" />
+    <ClInclude Include="source\duplex\syncfile_duplex.h" />
+    <ClInclude Include="source\framework.h" />
+    <ClInclude Include="source\listeners\cygwin_sockfile_listener.h" />
+    <ClInclude Include="source\listeners\listener.h" />
+    <ClInclude Include="source\listeners\namedpipe_listener.h" />
+    <ClInclude Include="source\listeners\tcp_socket_listener.h" />
+    <ClInclude Include="source\listeners\socket_listener_base.h" />
+    <ClInclude Include="source\listeners\unix_socket_listener.h" />
+    <ClInclude Include="source\listeners\wsl_socat_listener_base.h" />
+    <ClInclude Include="source\listeners\wsl_tcp_socket_listener.h" />
+    <ClInclude Include="source\listeners\wsl_unix_socket_listener.h" />
+    <ClInclude Include="source\logger\logger.h" />
+    <ClInclude Include="source\options.h" />
+    <ClInclude Include="source\proxy\proxy.h" />
+    <ClInclude Include="source\proxy\proxy_data.h" />
+    <ClInclude Include="source\resource.h" />
+    <ClInclude Include="source\targetver.h" />
+    <ClInclude Include="source\util\event_handler.h" />
+    <ClInclude Include="source\util\functions.h" />
+    <ClInclude Include="source\util\socket.h" />
+    <ClInclude Include="source\util\wsl_process.h" />
+    <ClInclude Include="source\util\wsl_util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\app\app.cpp" />
+    <ClCompile Include="source\app\simple_dialog.cpp" />
+    <ClCompile Include="source\app\window.cpp" />
+    <ClCompile Include="source\app\worker.cpp" />
+    <ClCompile Include="source\connectors\connector.cpp" />
+    <ClCompile Include="source\connectors\pipe_connector.cpp" />
+    <ClCompile Include="source\connectors\tcp_socket_connector.cpp" />
+    <ClCompile Include="source\connectors\unix_socket_connector.cpp" />
+    <ClCompile Include="source\connectors\wsl_socat_connector_base.cpp" />
+    <ClCompile Include="source\connectors\wsl_tcp_socket_connector.cpp" />
+    <ClCompile Include="source\connectors\wsl_unix_socket_connector.cpp" />
+    <ClCompile Include="source\duplex\file_duplex.cpp" />
+    <ClCompile Include="source\duplex\pipe_duplex.cpp" />
+    <ClCompile Include="source\duplex\socket_duplex.cpp" />
+    <ClCompile Include="source\duplex\syncfile_duplex.cpp" />
+    <ClCompile Include="source\listeners\cygwin_sockfile_listener.cpp" />
+    <ClCompile Include="source\listeners\namedpipe_listener.cpp" />
+    <ClCompile Include="source\listeners\tcp_socket_listener.cpp" />
+    <ClCompile Include="source\listeners\socket_listener_base.cpp" />
+    <ClCompile Include="source\listeners\unix_socket_listener.cpp" />
+    <ClCompile Include="source\listeners\wsl_socat_listener_base.cpp" />
+    <ClCompile Include="source\listeners\wsl_tcp_socket_listener.cpp" />
+    <ClCompile Include="source\listeners\wsl_unix_socket_listener.cpp" />
+    <ClCompile Include="source\logger\logger.cpp" />
+    <ClCompile Include="source\options.cpp" />
+    <ClCompile Include="source\proxy\proxy.cpp" />
+    <ClCompile Include="source\util\event_handler.cpp" />
+    <ClCompile Include="source\util\functions.cpp" />
+    <ClCompile Include="source\util\socket.cpp" />
+    <ClCompile Include="source\util\wsl_process.cpp" />
+    <ClCompile Include="source\util\wsl_util.cpp" />
+    <ClCompile Include="source\winmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="source\main.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitignore" />
+    <None Include="CHANGELOG.md" />
+    <None Include="lib\build\wslapi.def" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="lib\build\build.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,6 @@
+.vs/
+.work/
+obj/
+out/
+*.aps
+*.user

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{76ec2efa-9dd5-4bd8-8a1c-e8959f6c0ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="source\listeners">
+      <UniqueIdentifier>{cf79519a-3cba-4309-9ed5-34af0431fbf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\duplex">
+      <UniqueIdentifier>{e591e600-e1a2-463a-893b-4492e9f24a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\connectors">
+      <UniqueIdentifier>{31f12bea-7a45-4b0f-8b10-e1943deb9015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\app">
+      <UniqueIdentifier>{9350838a-4944-41f3-b89d-27708ce463ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\proxy">
+      <UniqueIdentifier>{b1d458e5-e6e9-4141-af11-4017a307b147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\util">
+      <UniqueIdentifier>{ddfe99e9-f798-4b36-80b3-cb9491382b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{0f390dc2-6ea5-4de1-86b7-849b3db33477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\logger">
+      <UniqueIdentifier>{32bd704e-097c-44fa-8177-08f5e1973933}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\common.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\framework.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\resource.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\targetver.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\duplex\duplex.h">
+      <Filter>source\duplex</Filter>
+    </ClInclude>
+    <ClInclude Include="source\duplex\socket_duplex.h">
+      <Filter>source\duplex</Filter>
+    </ClInclude>
+    <ClInclude Include="source\duplex\pipe_duplex.h">
+      <Filter>source\duplex</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\pipe_connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\options.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\duplex\file_duplex.h">
+      <Filter>source\duplex</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\worker.h">
+      <Filter>source\app</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\app.h">
+      <Filter>source\app</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\window.h">
+      <Filter>source\app</Filter>
+    </ClInclude>
+    <ClInclude Include="source\proxy\proxy.h">
+      <Filter>source\proxy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\functions.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\socket.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\wsl_util.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\cygwin_sockfile_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\namedpipe_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\unix_socket_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\socket_listener_base.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\event_handler.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\wsl_process.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="source\duplex\syncfile_duplex.h">
+      <Filter>source\duplex</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\wsl_socat_listener_base.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\wsl_unix_socket_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\wsl_tcp_socket_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\listeners\tcp_socket_listener.h">
+      <Filter>source\listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\tcp_socket_connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\unix_socket_connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\wsl_socat_connector_base.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\wsl_tcp_socket_connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\connectors\wsl_unix_socket_connector.h">
+      <Filter>source\connectors</Filter>
+    </ClInclude>
+    <ClInclude Include="source\logger\logger.h">
+      <Filter>source\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="source\proxy\proxy_data.h">
+      <Filter>source\proxy</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\simple_dialog.h">
+      <Filter>source\app</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\duplex\socket_duplex.cpp">
+      <Filter>source\duplex</Filter>
+    </ClCompile>
+    <ClCompile Include="source\duplex\pipe_duplex.cpp">
+      <Filter>source\duplex</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\pipe_connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\winmain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\options.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\duplex\file_duplex.cpp">
+      <Filter>source\duplex</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\app.cpp">
+      <Filter>source\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\window.cpp">
+      <Filter>source\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\worker.cpp">
+      <Filter>source\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\proxy\proxy.cpp">
+      <Filter>source\proxy</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\functions.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\socket.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\wsl_util.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\cygwin_sockfile_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\namedpipe_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\unix_socket_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\socket_listener_base.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\event_handler.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\wsl_process.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="source\duplex\syncfile_duplex.cpp">
+      <Filter>source\duplex</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\wsl_socat_listener_base.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\wsl_unix_socket_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\wsl_tcp_socket_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\listeners\tcp_socket_listener.cpp">
+      <Filter>source\listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\tcp_socket_connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\unix_socket_connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\wsl_socat_connector_base.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\wsl_tcp_socket_connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\connectors\wsl_unix_socket_connector.cpp">
+      <Filter>source\connectors</Filter>
+    </ClCompile>
+    <ClCompile Include="source\logger\logger.cpp">
+      <Filter>source\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\simple_dialog.cpp">
+      <Filter>source\app</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="source\main.rc">
+      <Filter>source</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="lib\build\wslapi.def">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="README.md" />
+    <None Include="LICENSE" />
+    <None Include="CHANGELOG.md" />
+    <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="lib\build\build.xml">
+      <Filter>lib</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
