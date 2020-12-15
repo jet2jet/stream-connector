@@ -76,7 +76,7 @@ STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
-    LTEXT           "stream-connector 0.1.0",IDC_STATIC,7,7,114,8,SS_NOPREFIX
+    LTEXT           "stream-connector 0.1.1",IDC_STATIC,7,7,114,8,SS_NOPREFIX
     LTEXT           "Copyright (c) 2020 jet",IDC_STATIC,7,19,114,8
     DEFPUSHBUTTON   "OK",IDOK,71,33,50,14,WS_GROUP
 END
@@ -124,8 +124,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,0,1
- PRODUCTVERSION 0,1,0,1
+ FILEVERSION 0,1,1,0
+ PRODUCTVERSION 0,1,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -138,19 +138,19 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "041104b0"
+        BLOCK "040004b0"
         BEGIN
             VALUE "FileDescription", "stream-connector : transfers data between sockets and pipes"
-            VALUE "FileVersion", "0.1.0.1"
+            VALUE "FileVersion", "0.1.1.0"
             VALUE "InternalName", "stream-connector"
             VALUE "OriginalFilename", "stream-connector.exe"
             VALUE "ProductName", "stream-connector"
-            VALUE "ProductVersion", "0.1.0.1"
+            VALUE "ProductVersion", "0.1.1.0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x411, 1200
+        VALUE "Translation", 0x400, 1200
     END
 END
 
