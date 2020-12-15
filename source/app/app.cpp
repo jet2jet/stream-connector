@@ -38,6 +38,10 @@ HWND g_hWnd = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////
 
+class AppLogger;
+
+static AppLogger* g_pAppLogger;
+
 class AppLogger : public Logger
 {
 private:
@@ -65,6 +69,13 @@ public:
             return nullptr;
         }
         return p;
+    }
+    void Clear()
+    {
+        ::EnterCriticalSection(&m_csLog);
+        m_logBuffer.clear();
+        ::LeaveCriticalSection(&m_csLog);
+        ::SetEvent(m_hEventLogUpdated);
     }
 
 protected:
@@ -99,6 +110,12 @@ private:
 LogLevel GetLogLevel()
 {
     return g_pOption ? g_pOption->logLevel : LogLevel::Error;
+}
+
+void ClearLogs()
+{
+    if (g_pAppLogger)
+        g_pAppLogger->Clear();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -514,8 +531,6 @@ void ReportListenersAndConnector(std::wstring& outString)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
-static AppLogger* g_pAppLogger;
 
 static bool InitInstance(_In_ HINSTANCE hInstance)
 {

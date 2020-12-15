@@ -5,6 +5,7 @@
 
 void ReportListenersAndConnector(_Out_ std::wstring& outString);
 LogLevel GetLogLevel();
+void ClearLogs();
 
 HINSTANCE GetAppInstance();
 PCWSTR GetAppTitle();

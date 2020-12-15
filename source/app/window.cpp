@@ -231,6 +231,9 @@ static void OnCommand(HWND hWnd, WindowData* data, UINT uCmdID)
 {
     switch (uCmdID)
     {
+        case ID_FILE_CLEARLOGS:
+            ClearLogs();
+            break;
         case ID_FILE_EXIT:
             //::SendMessageW(hWnd, WM_CLOSE, 0, 0);
             ::DestroyWindow(hWnd);

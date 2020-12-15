@@ -33,6 +33,7 @@ IDR_MAIN MENU
 BEGIN
     POPUP "&File"
     BEGIN
+        MENUITEM "Clear &logs",                 ID_FILE_CLEARLOGS
         MENUITEM "&Close",                      ID_FILE_CLOSE
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_FILE_EXIT
