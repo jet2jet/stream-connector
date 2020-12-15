@@ -380,7 +380,10 @@ HRESULT WslExecute(
     si.hStdError = hPipeStdErrWrite;
     si.dwFlags = STARTF_USESTDHANDLES;
     PROCESS_INFORMATION pi = { 0 };
-    if (!::CreateProcessW(nullptr, psz, nullptr, nullptr, TRUE, CREATE_NO_WINDOW | CREATE_NEW_PROCESS_GROUP, nullptr, nullptr, &si, &pi))
+    auto oldMode = ::SetErrorMode(SEM_FAILCRITICALERRORS);
+    auto ret = ::CreateProcessW(nullptr, psz, nullptr, nullptr, TRUE, CREATE_NO_WINDOW | CREATE_NEW_PROCESS_GROUP, nullptr, nullptr, &si, &pi);
+    ::SetErrorMode(oldMode);
+    if (!ret)
     {
         auto dw = ::GetLastError();
         free(psz);
