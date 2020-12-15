@@ -547,6 +547,8 @@ static bool InitInstance(_In_ HINSTANCE hInstance)
     if (!::RegisterClassExW(&wc))
         return false;
 
+    auto dpi = ::GetDpiFromDpiAwarenessContext(::GetThreadDpiAwarenessContext());
+
     g_hWnd = ::CreateWindowExW(
         0,
         WINDOW_CLASS_NAME,
@@ -554,8 +556,8 @@ static bool InitInstance(_In_ HINSTANCE hInstance)
         WS_OVERLAPPED | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
-        700,
-        600,
+        400 * dpi / 96,
+        260 * dpi / 96,
         nullptr,
         nullptr,
         hInstance,
