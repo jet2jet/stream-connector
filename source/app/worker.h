@@ -1,5 +1,6 @@
 #pragma once
 
+class Connector;
 class Duplex;
 
 typedef void (CALLBACK* PFinishHandler)(_In_ void* data, _In_ HRESULT hr);
@@ -9,5 +10,6 @@ typedef void (__cdecl* PAddLogFormatted)(_In_ LogLevel level, _In_z_ _Printf_for
 HRESULT Transfer(_In_ HANDLE hEventQuit, _In_ Duplex* from, _In_ Duplex* to, _In_opt_ PAddLogFormatted logger);
 
 _Check_return_
-HRESULT StartWorker(_Out_ HANDLE* outThread, _In_ HANDLE hEventQuit, _In_ Duplex* duplexIn, _In_ Duplex* duplexOut,
+HRESULT StartWorker(_Out_ HANDLE* outThread, _In_ HANDLE hEventQuit, _In_ Duplex* duplexIn,
+    _In_ WORD listenerId, _In_z_ PCWSTR pszConnectorTypeName, _In_ const Connector* connector,
     _In_opt_ PFinishHandler pfnFinishHandler, _In_opt_ void* dataHandler);

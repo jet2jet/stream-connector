@@ -1,6 +1,7 @@
 #include "../framework.h"
 #include "../util/functions.h"
 
+#include "../connectors/connector.h"
 #include "../duplex/duplex.h"
 
 #include "../logger/logger.h"
@@ -11,7 +12,9 @@ struct WorkerData
 {
     HANDLE hEventQuit;
     Duplex* duplexIn;
-    Duplex* duplexOut;
+    WORD listenerId;
+    PCWSTR typeName;
+    const Connector* connector;
     PFinishHandler pfnFinishHandler;
     void* dataHandler;
 };
@@ -212,18 +215,39 @@ HRESULT Transfer(HANDLE hEventQuit, Duplex* from, Duplex* to, PAddLogFormatted l
 
 static DWORD WINAPI WorkerThreadProc(WorkerData* data)
 {
-    auto hr = Transfer(data->hEventQuit, data->duplexIn, data->duplexOut, AddLogFormatted);
+    Duplex* duplexOut;
+    auto hr = data->connector->MakeConnection(&duplexOut);
+    if (SUCCEEDED(hr))
+    {
+        hr = Transfer(data->hEventQuit, data->duplexIn, duplexOut, AddLogFormatted);
+        delete duplexOut;
+    }
+    else
+    {
+        PWSTR psz;
+        if (SUCCEEDED(GetErrorString(hr, &psz)))
+        {
+            AddLogFormatted(LogLevel::Error, L"[%s %hu] Failed to make connection: [0x%08lX] %s",
+                data->typeName, data->listenerId, hr, psz);
+            free(psz);
+        }
+        else
+        {
+            AddLogFormatted(LogLevel::Error, L"[%s %hu] Failed to make connection: [0x%08lX]",
+                data->typeName, data->listenerId, hr);
+        }
+    }
+    delete data->duplexIn;
     auto pfn = data->pfnFinishHandler;
     auto d = data->dataHandler;
-    delete data->duplexIn;
-    delete data->duplexOut;
     free(data);
     pfn(d, hr);
     return static_cast<DWORD>(hr);
 }
 
 _Use_decl_annotations_
-HRESULT StartWorker(HANDLE* outThread, HANDLE hEventQuit, Duplex* duplexIn, Duplex* duplexOut,
+HRESULT StartWorker(HANDLE* outThread, HANDLE hEventQuit, Duplex* duplexIn,
+    WORD listenerId, PCWSTR pszConnectorTypeName, const Connector* connector,
     PFinishHandler pfnFinishHandler, void* dataHandler)
 {
     *outThread = INVALID_HANDLE_VALUE;
@@ -232,7 +256,9 @@ HRESULT StartWorker(HANDLE* outThread, HANDLE hEventQuit, Duplex* duplexIn, Dupl
         return E_OUTOFMEMORY;
     data->hEventQuit = hEventQuit;
     data->duplexIn = duplexIn;
-    data->duplexOut = duplexOut;
+    data->listenerId = listenerId;
+    data->typeName = pszConnectorTypeName;
+    data->connector = connector;
     data->pfnFinishHandler = pfnFinishHandler;
     data->dataHandler = dataHandler;
 

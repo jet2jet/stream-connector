@@ -143,30 +143,11 @@ static void CALLBACK OnAcceptHandler(_In_ Duplex* duplex, _In_ ListenerData* dat
     auto typeName = g_listenerTypeNames[static_cast<size_t>(data->type)];
     AddLogFormatted(LogLevel::Info, L"[%s %hu] Accepted", typeName, data->id);
 
-    Duplex* duplexTo = nullptr;
-    auto hr = g_pConnector->MakeConnection(&duplexTo);
-    if (FAILED(hr))
-    {
-        delete duplex;
-        PWSTR psz;
-        if (SUCCEEDED(GetErrorString(hr, &psz)))
-        {
-            AddLogFormatted(LogLevel::Error, L"[%s %hu] Failed to make connection: [0x%08lX] %s", typeName, data->id,
-                hr, psz);
-            free(psz);
-        }
-        else
-        {
-            AddLogFormatted(LogLevel::Error, L"[%s %hu] Failed to make connection: [0x%08lX]", typeName, data->id,
-                hr);
-        }
-        return;
-    }
     HANDLE hThread;
-    hr = StartWorker(&hThread, g_hEventQuit, duplex, duplexTo, reinterpret_cast<PFinishHandler>(OnFinishHandler), data);
+    auto hr = StartWorker(&hThread, g_hEventQuit, duplex, data->id, typeName, g_pConnector,
+        reinterpret_cast<PFinishHandler>(OnFinishHandler), data);
     if (FAILED(hr))
     {
-        delete duplexTo;
         delete duplex;
         PWSTR psz;
         if (SUCCEEDED(GetErrorString(hr, &psz)))
