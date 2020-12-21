@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Add `--wsl-timeout` and `--wsl-socat-log-level` options
+- Fix default bind address to localhost (`127.0.0.1` / `[::1]`)
+
 ## 0.1.1
 
 - Add workaround for pipe connection busy

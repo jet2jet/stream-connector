@@ -28,12 +28,15 @@ Usage: stream-connector.exe <options>
   -n <name>, --name <name> : User-defined name
   --log <level> : Set log level
     <level>: error, info, debug (default: error)
+  --wsl-socat-log-level <level> : Set log level for WSL socat
+    <level>: 0 (nothing), 1 (-d), 2 (-dd), 3 (-ddd), 4 (-dddd) (default: 0)
+  --wsl-timeout <millisec> : Set timeout for WSL preparing (default: 30000)
 
 <listener>:
   tcp-socket [-4 | -6] [<address>:]<port> : TCP socket listener (port num. can be 0 for auto-assign)
-    alias for 'tcp-socke't: s, sock, socket, tcp
+    alias for 'tcp-socket': s, sock, socket, tcp
   unix-socket [--abstract] <file-path> : Unix socket listener (listener with the socket file)
-    alias for 'unix-socket': u
+    alias for 'unix-socket': u, unix
   cygwin-sockfile <win-file-path> : Listener with Cygwin-spec socket file
     alias for 'cygwin-sockfile': c
   pipe <pipe-name> : Named-pipe listener
@@ -193,6 +196,24 @@ Specifies any user-defined name. This name is used for the taskbar icon name and
 ### --log <level>
 
 Specifies the log level (logged on the status window). Valid `<level>` values are: `error` (default; only logged for errors), `info` (a bit verbose), `debug` (more verbose)
+
+### --wsl-timeout <millisec>
+
+Specifies the timeout value for preparing WSL processes (default: 30000)
+
+### --wsl-socat-log-level <level>
+
+> Alias: `--wsl-socat-log`
+
+Specifies the log-level value for WSL socat. Following values are valid:
+
+- 0 : Default logs (default)
+- 1 : `-d`
+- 2 : `-dd`
+- 3 : `-ddd`
+- 4 : `-dddd`
+
+> Note: `-d`, `-dd`, `-ddd`, and `-dddd` can be used as `<level>` value.
 
 ### -x <proxy-id>, --proxy <proxy-id>
 
