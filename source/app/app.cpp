@@ -426,7 +426,7 @@ void ReportListenersAndConnector(std::wstring& outString)
                     auto d = static_cast<TcpSocketListenerData*>(data);
                     PWSTR psz;
                     if (SUCCEEDED(MakeFormattedString(&psz, L"[tcp-socket %hu] %s:%hu", d->id,
-                        d->pszAddress ? d->pszAddress : (d->isIPv6 ? L"[::]" : L"0.0.0.0"), d->port)))
+                        d->pszAddress ? d->pszAddress : (d->isIPv6 ? L"[::1]" : L"127.0.0.1"), d->port)))
                     {
                         str += psz;
                     }
@@ -468,7 +468,7 @@ void ReportListenersAndConnector(std::wstring& outString)
                     auto d = static_cast<WslTcpSocketListenerData*>(data);
                     PWSTR psz;
                     if (SUCCEEDED(MakeFormattedString(&psz, L"[wsl-tcp-socket %hu] %s:%hu (distro = %s)",
-                        d->id, d->pszAddress ? d->pszAddress : (d->isIPv6 ? L"[::]" : L"0.0.0.0"), d->port,
+                        d->id, d->pszAddress ? d->pszAddress : (d->isIPv6 ? L"[::1]" : L"127.0.0.1"), d->port,
                         d->pszDistribution ? d->pszDistribution : L"[default]")))
                     {
                         str += psz;

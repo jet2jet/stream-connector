@@ -19,12 +19,12 @@ HRESULT WslTcpSocketListener::Initialize(PCWSTR pszDistributionName, PCWSTR pszB
 
     PWSTR pszListen;
     HRESULT hr;
-    if (pszBindAddress)
+    if (isIPv6)
         hr = MakeFormattedString(&pszListen, L"%s:%hu,bind='%s',fork,reuseaddr",
-            isIPv6 ? L"tcp6-listen" : L"tcp4-listen", port, pszBindAddress);
+            L"tcp6-listen", port, pszBindAddress ? pszBindAddress : L"[::1]");
     else
-        hr = MakeFormattedString(&pszListen, L"%s:%hu,fork,reuseaddr",
-            isIPv6 ? L"tcp6-listen" : L"tcp4-listen", port);
+        hr = MakeFormattedString(&pszListen, L"%s:%hu,bind='%s',fork,reuseaddr",
+            L"tcp4-listen", port, pszBindAddress ? pszBindAddress : L"127.0.0.1");
     if (FAILED(hr))
         return hr;
 

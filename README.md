@@ -73,7 +73,7 @@ Creates TCP socket and listens with specified address and port.
 - If `-6` is specified, IPv6 is used.
 - If `-4` or `-6` is not specified and `<address>` starts with `[`, IPv6 is used; otherwise IPv4 is used.
 
-If `<address>` is omitted, `0.0.0.0` or `[::]` is used.
+If `<address>` is omitted, `127.0.0.1` or `[::1]` is used.
 
 #### unix-socket \[--abstract\] <file-path>
 
@@ -114,7 +114,7 @@ Creates TCP socket and listens with specified address and port on WSL environmen
 - If `-6` is specified, IPv6 (`tcp6-listen`) is used.
 - If `-4` or `-6` is not specified and `<address>` starts with `[`, IPv6 is used; otherwise IPv4 is used.
 
-If `<address>` is omitted, `0.0.0.0` or `[::]` is used.
+If `<address>` is omitted, `127.0.0.1` or `[::1]` is used.
 
 #### wsl-unix-socket \[--distribution <distro>\] \[<wsl-file-path>\]
 
