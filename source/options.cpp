@@ -18,6 +18,9 @@ static void ShowHelp(_In_opt_z_ PCWSTR errorReason = nullptr)
         L"  -n <name>, --name <name> : User-defined name\n"
         L"  --log <level> : Set log level\n"
         L"    <level>: error, info, debug (default: error)\n"
+        L"  --wsl-socat-log-level <level> : Set log level for WSL socat\n"
+        L"    <level>: 0 (nothing), 1 (-d), 2 (-dd), 3 (-ddd), 4 (-dddd) (default: 0)\n"
+        L"  --wsl-timeout <millisec> : Set timeout for WSL preparing (default: 30000)\n"
         L"\n"
         L"<listener>:\n"
         L"  tcp-socket [-4 | -6] [<address>:]<port> : TCP socket listener (port num. can be 0 for auto-assign)\n"
@@ -718,6 +721,7 @@ HRESULT ParseOptions(Option* outOptions)
     PWSTR errorReason = nullptr;
     ZeroMemory(outOptions, sizeof(Option));
     outOptions->logLevel = LogLevel::Error;
+    outOptions->wslDefaultTimeout = WSL_DEFAULT_TIMEOUT;
     for (int i = 1; i < __argc;)
     {
         auto arg = __wargv[i];
@@ -881,9 +885,9 @@ HRESULT ParseOptions(Option* outOptions)
                 }
                 else
                 {
-                    auto arg1 = __wargv[i];
+                    auto arg1 = __wargv[i++];
                     wchar_t* p;
-                    auto i = wcstol(arg1, &p, 10);
+                    auto x = wcstol(arg1, &p, 10);
                     if (!p || *p)
                     {
                         if (wcscmp(arg1, L"error") == 0)
@@ -905,7 +909,7 @@ HRESULT ParseOptions(Option* outOptions)
                     }
                     else
                     {
-                        if (i < static_cast<decltype(i)>(LogLevel::Error) || i >= static_cast<decltype(i)>(LogLevel::_Count))
+                        if (x < static_cast<decltype(x)>(LogLevel::Error) || x >= static_cast<decltype(x)>(LogLevel::_Count))
                         {
                             hr = E_INVALIDARG;
                             MakeFormattedString(
@@ -917,7 +921,115 @@ HRESULT ParseOptions(Option* outOptions)
                         }
                         else
                         {
-                            outOptions->logLevel = static_cast<LogLevel>(i);
+                            outOptions->logLevel = static_cast<LogLevel>(x);
+                        }
+                    }
+                }
+            }
+            else if (isMultipleCharOption && wcscmp(arg, L"wsl-timeout") == 0)
+            {
+                if (i >= __argc)
+                {
+                    hr = E_INVALIDARG;
+                    MakeFormattedString(
+                        &errorReason,
+                        L"Timeout value is missing"
+                    );
+                    break;
+                }
+                else
+                {
+                    auto arg1 = __wargv[i];
+                    wchar_t* p;
+                    auto x = wcstol(arg1, &p, 10);
+                    if (!p || *p)
+                    {
+                        hr = E_INVALIDARG;
+                        MakeFormattedString(
+                            &errorReason,
+                            L"Timeout value is invalid (actual: %s)",
+                            arg1
+                        );
+                        break;
+                    }
+                    else
+                    {
+                        if (x < 0 || x >= 7200000)
+                        {
+                            hr = E_INVALIDARG;
+                            MakeFormattedString(
+                                &errorReason,
+                                L"Timeout value is invalid (actual: %s)",
+                                arg1
+                            );
+                            break;
+                        }
+                        else
+                        {
+                            outOptions->wslDefaultTimeout = static_cast<DWORD>(x);
+                        }
+                    }
+                }
+            }
+            else if (isMultipleCharOption && (
+                wcscmp(arg, L"wsl-socat") == 0 ||
+                wcscmp(arg, L"wsl-socat-log") == 0 ||
+                wcscmp(arg, L"wsl-socat-log-level") == 0
+            ))
+            {
+                if (i >= __argc)
+                {
+                    hr = E_INVALIDARG;
+                    MakeFormattedString(
+                        &errorReason,
+                        L"Socat log level value is missing"
+                    );
+                    break;
+                }
+                else
+                {
+                    auto arg1 = __wargv[i++];
+                    wchar_t* p;
+                    auto x = wcstol(arg1, &p, 10);
+                    if (!p || *p)
+                    {
+                        // support "d", "dd", "ddd", "dddd"
+                        if (*arg1 == L'-')
+                            ++arg1;
+                        if (wcscmp(arg1, L"d") == 0)
+                            outOptions->wslSocatLogLevel = 1;
+                        else if (wcscmp(arg1, L"dd") == 0)
+                            outOptions->wslSocatLogLevel = 2;
+                        else if (wcscmp(arg1, L"ddd") == 0)
+                            outOptions->wslSocatLogLevel = 3;
+                        else if (wcscmp(arg1, L"dddd") == 0)
+                            outOptions->wslSocatLogLevel = 4;
+                        else
+                        {
+                            hr = E_INVALIDARG;
+                            MakeFormattedString(
+                                &errorReason,
+                                L"Socat log level value is invalid (actual: %s)",
+                                arg1
+                            );
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (x < 0 || x > 4)
+                        {
+                            hr = E_INVALIDARG;
+                            MakeFormattedString(
+                                &errorReason,
+                                L"Socat log level value is invalid (actual: %s)",
+                                arg1
+                            );
+                            break;
+                        }
+                        else
+                        {
+                            outOptions->wslSocatLogLevel = static_cast<BYTE>(x);
                         }
                     }
                 }

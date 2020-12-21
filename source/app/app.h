@@ -7,6 +7,9 @@ void ReportListenersAndConnector(_Out_ std::wstring& outString);
 LogLevel GetLogLevel();
 void ClearLogs();
 
+DWORD GetWslDefaultTimeout();
+PCWSTR GetWslSocatLogLevel();
+
 HINSTANCE GetAppInstance();
 PCWSTR GetAppTitle();
 

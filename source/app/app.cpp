@@ -120,6 +120,30 @@ void ClearLogs()
 
 ////////////////////////////////////////////////////////////////////////////////
 
+DWORD GetWslDefaultTimeout()
+{
+    return g_pOption ? g_pOption->wslDefaultTimeout : WSL_DEFAULT_TIMEOUT;
+}
+
+PCWSTR GetWslSocatLogLevel()
+{
+    switch (g_pOption ? g_pOption->wslSocatLogLevel : 0)
+    {
+        default:
+            return L"";
+        case 1:
+            return L"-d ";
+        case 2:
+            return L"-dd ";
+        case 3:
+            return L"-ddd ";
+        case 4:
+            return L"-dddd ";
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 static const PCWSTR g_listenerTypeNames[] = {
     L"tcp-socket", // ListenerType::Socket
     L"unix-socket", // ListenerType::Unix

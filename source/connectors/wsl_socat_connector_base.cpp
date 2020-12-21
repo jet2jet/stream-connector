@@ -3,6 +3,7 @@
 #include "../util/functions.h"
 #include "../util/wsl_util.h"
 
+#include "../app/app.h"
 #include "../duplex/file_duplex.h"
 
 #ifdef _WIN64
@@ -56,12 +57,12 @@ HRESULT WslSocatConnectorBase::MakeConnection(Duplex** outDuplex) const
 
     HRESULT hr;
     PWSTR pszSocatFileName;
-    hr = WslWhich(m_pszDistributionName, L"socat", 10000, &pszSocatFileName);
+    hr = WslWhich(m_pszDistributionName, L"socat", GetWslDefaultTimeout(), &pszSocatFileName);
     if (FAILED(hr))
         return hr;
 
     PWSTR pszCommandLine;
-    hr = MakeFormattedString(&pszCommandLine, L"%s stdio %s", pszSocatFileName, m_pszConnect);
+    hr = MakeFormattedString(&pszCommandLine, L"%s %sstdio %s", GetWslSocatLogLevel(), pszSocatFileName, m_pszConnect);
     free(pszSocatFileName);
     if (FAILED(hr))
         return hr;

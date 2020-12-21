@@ -65,14 +65,15 @@ HRESULT WslSocatListenerBase::InitializeBase(LPCWSTR pszDistributionName, LPCWST
     if (!pszDistributionNameDup)
         return E_OUTOFMEMORY;
     PWSTR pszCurrentProcessWslFileName;
-    auto hr = WslPath(pszDistributionName, GetCurrentProcessModuleName(), 10000, &pszCurrentProcessWslFileName);
+    auto hr = WslPath(pszDistributionName, GetCurrentProcessModuleName(),
+        GetWslDefaultTimeout(), &pszCurrentProcessWslFileName);
     if (FAILED(hr))
     {
         free(pszDistributionNameDup);
         return hr;
     }
     PWSTR pszSocatFileName;
-    hr = WslWhich(pszDistributionName, L"socat", 10000, &pszSocatFileName);
+    hr = WslWhich(pszDistributionName, L"socat", GetWslDefaultTimeout(), &pszSocatFileName);
     if (FAILED(hr))
     {
         free(pszCurrentProcessWslFileName);
@@ -92,8 +93,8 @@ HRESULT WslSocatListenerBase::InitializeBase(LPCWSTR pszDistributionName, LPCWST
 
     PWSTR pszCommand;
     // execute wsl -d <distro> -e sh -c "('<socat>' \"unix-listen:'<sock-file>',fork\" \"exec:'\\\"<stream-connector.exe>\\\" -x <pipe-id>',nofork\" & echo $!; wait $!)"
-    hr = MakeFormattedString(&pszCommand, L"sh -c \"('%s' \\\"%s\\\" \\\"exec:'\\\\\\\"%s\\\\\\\" -x %s',nofork\\\" & echo $!; wait $!)\"",
-        pszSocatFileName, pszListen, pszCurrentProcessWslFileName, pszPipeId);
+    hr = MakeFormattedString(&pszCommand, L"sh -c \"('%s' %s\\\"%s\\\" \\\"exec:'\\\\\\\"%s\\\\\\\" -x %s',nofork\\\" & echo $!; wait $!)\"",
+        pszSocatFileName, GetWslSocatLogLevel(), pszListen, pszCurrentProcessWslFileName, pszPipeId);
     free(pszSocatFileName);
     free(pszCurrentProcessWslFileName);
     free(pszPipeId);
@@ -136,7 +137,7 @@ HRESULT WslSocatListenerBase::InitializeBase(LPCWSTR pszDistributionName, LPCWST
         return hr;
     }
     PWSTR p;
-    hr = m_process.ReadLineFromStdOut(&p, 5000);
+    hr = m_process.ReadLineFromStdOut(&p, GetWslDefaultTimeout());
     if (FAILED(hr))
     {
         Close();

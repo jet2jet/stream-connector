@@ -2,6 +2,8 @@
 #include "../util/functions.h"
 #include "../util/wsl_util.h"
 
+#include "../app/app.h"
+
 #include "wsl_unix_socket_listener.h"
 
 #ifdef _WIN64
@@ -17,7 +19,7 @@ HRESULT WslUnixSocketListener::Initialize(LPCWSTR pszDistributionName, LPCWSTR p
 {
     if (m_hPipeCurrent != INVALID_HANDLE_VALUE)
         return S_OK;
-    auto hr = WslTestIfWritable(pszDistributionName, pszSocketWslFilePath, 3000);
+    auto hr = WslTestIfWritable(pszDistributionName, pszSocketWslFilePath, GetWslDefaultTimeout());
     if (FAILED(hr))
         return hr;
     if (hr == S_FALSE)

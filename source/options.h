@@ -15,6 +15,8 @@ enum class ListenerType : WORD
     _Count
 };
 
+#define WSL_DEFAULT_TIMEOUT  30000
+
 struct ListenerData
 {
     ListenerType type;
@@ -113,7 +115,9 @@ struct Option
     PWSTR pszName;
     std::vector<ListenerData*>* listeners;
     ConnectorData* connector;
+    DWORD wslDefaultTimeout;
     LogLevel logLevel;
+    BYTE wslSocatLogLevel;
 };
 
 _Check_return_
