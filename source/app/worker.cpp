@@ -8,6 +8,8 @@
 
 #include "worker.h"
 
+constexpr DWORD TIMEOUT_FOR_CONTINUOUS_READ = 10;
+
 struct WorkerData
 {
     HANDLE hEventQuit;
@@ -139,7 +141,7 @@ HRESULT Transfer(HANDLE hEventQuit, Duplex* from, Duplex* to, PAddLogFormatted l
                 hr = from->StartRead(&hFrom);
                 if (FAILED(hr))
                     break;
-                if (::WaitForSingleObject(hFrom, 0) != WAIT_OBJECT_0)
+                if (::WaitForSingleObject(hFrom, TIMEOUT_FOR_CONTINUOUS_READ) != WAIT_OBJECT_0)
                     break;
             }
             if (hr != S_OK && (FAILED(hr) || allReceived.size() == 0))
@@ -182,7 +184,7 @@ HRESULT Transfer(HANDLE hEventQuit, Duplex* from, Duplex* to, PAddLogFormatted l
                 hr = to->StartRead(&hTo);
                 if (FAILED(hr))
                     break;
-                if (::WaitForSingleObject(hTo, 0) != WAIT_OBJECT_0)
+                if (::WaitForSingleObject(hTo, TIMEOUT_FOR_CONTINUOUS_READ) != WAIT_OBJECT_0)
                     break;
             }
             if (hr != S_OK && (FAILED(hr) || allReceived.size() == 0))
