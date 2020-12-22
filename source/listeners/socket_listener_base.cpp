@@ -54,6 +54,7 @@ _Use_decl_annotations_
 void SocketListener::EventHandler(void* data)
 {
     SocketListener* pThis = static_cast<SocketListener*>(data);
+    ::ResetEvent(pThis->m_hEvent);
 
     auto sock = ::accept(pThis->m_socket, nullptr, nullptr);
     if (sock == INVALID_SOCKET)
