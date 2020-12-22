@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Fix for missing reset event
+- Add wait time for continuous read on worker
+
 ## 0.1.2
 
 - Add `--wsl-timeout` and `--wsl-socat-log-level` options
