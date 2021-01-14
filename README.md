@@ -58,7 +58,7 @@ Usage: stream-connector.exe <options>
 
 Shows usage and exit.
 
-### -l <listener>, --listener <listener>
+### -l &lt;listener&gt;, --listener &lt;listener&gt;
 
 > (Required option)
 
@@ -66,7 +66,7 @@ Specifies 'listener', the data source to transfer. The listener can be specified
 
 The followings are the listeners which can be specified as `<listener>`.
 
-#### tcp-socket \[-4 | -6\] \[<address>:\]<port>
+#### tcp-socket \[-4 | -6\] \[&lt;address&gt;:\]&lt;port&gt;
 
 > Alias for `tcp-socket`: `s` `sock` `socket` `tcp`
 
@@ -78,16 +78,16 @@ Creates TCP socket and listens with specified address and port.
 
 If `<address>` is omitted, `127.0.0.1` or `[::1]` is used.
 
-#### unix-socket \[--abstract\] <file-path>
+#### unix-socket \[--abstract\] &lt;file-path&gt;
 
 > Alias for `unix-socket`: `u` `unix`
 
 Creates Unix socket and listens with specified file. If `--abstract` (or `-a`) is specified, the socket is bound as 'abstract'.  
-The file specified in `<file-path>` must not be exist and writable. When program exits, the file will be removed.
+The file specified in `<file-path>` must writable and not be exist. When program exits, the file will be removed.
 
 Note: Unix socket doesn't work well for some Windows 10 version (at least Build 19042 is required)
 
-#### cygwin-sockfile <file-name>
+#### cygwin-sockfile &lt;file-name&gt;
 
 > Alias for `cygwin-sockfile`: `c`
 
@@ -95,13 +95,13 @@ Creates 'Cygwin'-based Unix socket and listens with specified file. Unlike 'unix
 
 Note: This option does *not* require Cygwin or MSYS2 environments.
 
-#### pipe <pipe-name>
+#### pipe &lt;pipe-name&gt;
 
 > Alias for `pipe`: `p`
 
 Creates named pipe and waits for connected. The pipe name (`<pipe-name>`) must start with `\\.\pipe\`.
 
-#### wsl-tcp-socket \[--distribution <distro>\] \[-4 | -6\] \[<address>:\]<port>
+#### wsl-tcp-socket \[--distribution &lt;distro&gt;\] \[-4 | -6\] \[&lt;address&gt;:\]&lt;port&gt;
 
 > Alias for `wsl-tcp-socket`: `ws` `wt`
 
@@ -119,7 +119,7 @@ Creates TCP socket and listens with specified address and port on WSL environmen
 
 If `<address>` is omitted, `127.0.0.1` or `[::1]` is used.
 
-#### wsl-unix-socket \[--distribution <distro>\] \[<wsl-file-path>\]
+#### wsl-unix-socket \[--distribution &lt;distro&gt;\] \[&lt;wsl-file-path&gt;\]
 
 > Alias for `wsl-unix-socket`: `wu`
 
@@ -133,7 +133,7 @@ Creates Unix socket and listens with specified file on WSL environment.
 - If `--distribution` (or `-d`) is omitted, the default distribution is used.
 - The file path `<wsl-file-path>` must be the valid file path on the WSL environment. The file will be removed when the program exits.
 
-### -c <connector>, --connector <connector>
+### -c &lt;connector&gt;, --connector &lt;connector&gt;
 
 > (Required option)
 
@@ -141,28 +141,28 @@ Specifies 'connector', the target to transfer. The connector is created when the
 
 The followings are the connectors which can be specified as `<connector>`.
 
-#### tcp-socket <address>:<port>
+#### tcp-socket &lt;address&gt;:&lt;port&gt;
 
 > Alias for `tcp-socket`: `s` `sock` `socket` `tcp`
 
 Creates TCP socket and connects with specified address and port.
 
-#### unix-socket \[--abstract\] <file-path>
+#### unix-socket \[--abstract\] &lt;file-path&gt;
 
 > Alias for `unix-socket`: `u` `unix`
 
 Creates Unix socket and connects with specified file. If `--abstract` (or `-a`) is specified, the socket is bound as 'abstract'.  
-The file specified in `<file-path>` must not be exist and writable. When program exits, the file will be removed.
+The file specified in `<file-path>` must writable and not be exist. When program exits, the file will be removed.
 
 Note: Unix socket doesn't work well for some Windows 10 version (at least Build 19042 is required)
 
-#### pipe <pipe-name>
+#### pipe &lt;pipe-name&gt;
 
 > Alias for `pipe`: `p`
 
 Opens named pipe. The pipe name (`<pipe-name>`) must start with `\\.\pipe\`.
 
-#### wsl-tcp-socket \[--distribution <distro>\] <address>:<port>
+#### wsl-tcp-socket \[--distribution &lt;distro&gt;\] &lt;address&gt;:&lt;port&gt;
 
 > Alias for `wsl-tcp-socket`: `ws` `wt`
 
@@ -175,7 +175,7 @@ Creates TCP socket and connects with specified address and port on WSL environme
 
 **Note: [socat](http://www.dest-unreach.org/socat/) must be installed on specified WSL environment.** Also, WSL must be installed on Windows. :)
 
-#### wsl-unix-socket \[--distribution <distro>\] \[<wsl-file-path>\]
+#### wsl-unix-socket \[--distribution &lt;distro&gt;\] \[&lt;wsl-file-path&gt;\]
 
 > Alias for `wsl-unix-socket`: `wu`
 
@@ -189,19 +189,19 @@ Creates Unix socket and connects with specified file on WSL environment.
 
 **Note: [socat](http://www.dest-unreach.org/socat/) must be installed on specified WSL environment.** Also, WSL must be installed on Windows. :)
 
-### -n <name>, --name <name>
+### -n &lt;name&gt;, --name &lt;name&gt;
 
 Specifies any user-defined name. This name is used for the taskbar icon name and the window title, so you can use this option for distinguishing stream-connector programs executed with different options.
 
-### --log <level>
+### --log &lt;level&gt;
 
 Specifies the log level (logged on the status window). Valid `<level>` values are: `error` (default; only logged for errors), `info` (a bit verbose), `debug` (more verbose)
 
-### --wsl-timeout <millisec>
+### --wsl-timeout &lt;millisec&gt;
 
 Specifies the timeout value for preparing WSL processes (default: 30000)
 
-### --wsl-socat-log-level <level>
+### --wsl-socat-log-level &lt;level&gt;
 
 > Alias: `--wsl-socat-log`
 
@@ -215,7 +215,7 @@ Specifies the log-level value for WSL socat. Following values are valid:
 
 > Note: `-d`, `-dd`, `-ddd`, and `-dddd` can be used as `<level>` value.
 
-### -x <proxy-id>, --proxy <proxy-id>
+### -x &lt;proxy-id&gt;, --proxy &lt;proxy-id&gt;
 
 Used internally.
 
