@@ -152,7 +152,7 @@ Creates TCP socket and connects with specified address and port.
 > Alias for `unix-socket`: `u` `unix`
 
 Creates Unix socket and connects with specified file. If `--abstract` (or `-a`) is specified, the socket is bound as 'abstract'.  
-The file specified in `<file-path>` must writable and not be exist. When program exits, the file will be removed.
+The file specified in `<file-path>` must be accessible as a Unix socket.
 
 Note: Unix socket doesn't work well for some Windows 10 version (at least Build 19042 is required)
 
@@ -185,7 +185,7 @@ Creates Unix socket and connects with specified file on WSL environment.
 
 - `--distribution <distro>` (or `-d <distro>`) : Specifies existing distribution name to listen.
 - If `--distribution` (or `-d`) is omitted, the default distribution is used.
-- The file path `<wsl-file-path>` must be the valid file path on the WSL environment. The file will be removed when the program exits.
+- The file path `<wsl-file-path>` must be must be accessible as a Unix socket on the WSL environment.
 
 **Note: [socat](http://www.dest-unreach.org/socat/) must be installed on specified WSL environment.** Also, WSL must be installed on Windows. :)
 
