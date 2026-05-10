@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4
+
+- Fix socat option for wsl-tcp-socket
+- Add alias description for usage
+- Reuse no-longer-available socket file
+
 ## 0.1.3
 
 - Fix for missing reset event
