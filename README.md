@@ -48,10 +48,14 @@ Usage: stream-connector.exe <options>
 
 <connector>:
   tcp-socket <address>:<port> : TCP socket connector (port num. cannot be 0)
+    alias for 'tcp-socket': s, sock, socket, tcp
   unix-socket [--abstract] <file-name> : Unix socket connector
+    alias for 'unix-socket': u, unix
   pipe <pipe-name> : Named-pipe connector
   wsl-tcp-socket [-d <distribution>] <address>:<port> : TCP socket connector in WSL (port num. cannot be 0)
+    alias for 'wsl-tcp-socket': ws, wt
   wsl-unix-socket [-d <distribution>] [--abstract] <wsl-file-path> : Unix socket connector in WSL
+    alias for 'wsl-unix-socket': wu
 ```
 
 ### -h, -?, --help
