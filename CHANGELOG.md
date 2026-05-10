@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.4 - 0.1.5
+## 0.1.4 - 0.1.6
 
 - Fix socat option for wsl-tcp-socket
 - Add alias description for usage
