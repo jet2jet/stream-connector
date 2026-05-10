@@ -287,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include=".github\workflows\build-and-release.yml" />
     <None Include=".gitignore" />
     <None Include="CHANGELOG.md" />
     <None Include="lib\build\wslapi.def" />

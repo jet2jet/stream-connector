@@ -32,6 +32,9 @@
     <Filter Include="source\logger">
       <UniqueIdentifier>{32bd704e-097c-44fa-8177-08f5e1973933}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GitHub workflows">
+      <UniqueIdentifier>{2adfa39d-cd45-4919-929c-c0c8dcd7f59c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\common.h">
@@ -261,6 +264,9 @@
     <None Include="LICENSE" />
     <None Include="CHANGELOG.md" />
     <None Include=".gitignore" />
+    <None Include=".github\workflows\build-and-release.yml">
+      <Filter>GitHub workflows</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="lib\build\build.xml">
