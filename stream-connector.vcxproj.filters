@@ -151,6 +151,9 @@
     <ClInclude Include="source\app\simple_dialog.h">
       <Filter>source\app</Filter>
     </ClInclude>
+    <ClInclude Include="source\util\cygwin.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\duplex\socket_duplex.cpp">
@@ -248,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="source\app\simple_dialog.cpp">
       <Filter>source\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\util\cygwin.cpp">
+      <Filter>source\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

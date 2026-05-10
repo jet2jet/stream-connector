@@ -1,6 +1,31 @@
 #include "../framework.h"
 #include "socket.h"
 
+namespace
+{
+    WSADATA g_wsaData = { 0 };
+}
+
+_Use_decl_annotations_
+HRESULT InitializeWinsock()
+{
+    if (g_wsaData.wVersion != 0)
+    {
+        return S_OK;
+    }
+    auto err = ::WSAStartup(MAKEWORD(2, 2), &g_wsaData);
+    if (err != 0)
+    {
+        return GetWSAErrorAsHResult(err);
+    }
+    return S_OK;
+}
+
+void FinalizeWinsock()
+{
+    ::WSACleanup();
+}
+
 _Use_decl_annotations_
 HRESULT GetWSAErrorAsHResult(int result)
 {

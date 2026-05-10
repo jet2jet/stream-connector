@@ -1,4 +1,6 @@
 #include "../framework.h"
+#include "../logger/logger.h"
+#include "../util/cygwin.h"
 #include "../util/functions.h"
 #include "../util/socket.h"
 
@@ -48,70 +50,17 @@ HRESULT CygwinSockFileListener::InitializeSocket(LPCWSTR pszSocketFilePath, PAcc
         ::closesocket(socket);
         return hr;
     }
-    int namelen = sizeof(sin);
-    if (::getsockname(socket, reinterpret_cast<sockaddr*>(&sin), &namelen) == SOCKET_ERROR)
-    {
-        auto hr = GetLastWSAErrorAsHResult();
-        free(pszSocketFilePathDup);
-        ::closesocket(socket);
-        return hr;
-    }
-    auto port = ::ntohs(sin.sin_port);
 
-    // at least 18 + (8 * 4) + 3
-    char buffer[56];
-    auto dataSize = _snprintf_s(
-        buffer,
-        56,
-        "!<socket >%hu s %08lX-%08lX-%08lX-%08lX",
-        port,
-        m_idSocket[0],
-        m_idSocket[1],
-        m_idSocket[2],
-        m_idSocket[3]
-    );
-
-    DWORD dw;
-    if (::GetFileAttributesW(pszSocketFilePathDup) != INVALID_FILE_ATTRIBUTES)
+    bool bIsOverwritten = false;
     {
-        if (!::SetFileAttributesW(pszSocketFilePathDup, 0))
+        auto hr = CreateCygwinSockFile(pszSocketFilePath, socket, m_idSocket, &bIsOverwritten);
+        if (FAILED(hr))
         {
-            dw = ::GetLastError();
-            _Analysis_assume_(dw != 0);
             free(pszSocketFilePathDup);
             ::closesocket(socket);
-            return HRESULT_FROM_WIN32(dw);
+            return hr;
         }
     }
-    auto hFile = ::CreateFileW(
-        pszSocketFilePathDup,
-        GENERIC_WRITE,
-        FILE_SHARE_READ,
-        nullptr,
-        CREATE_ALWAYS,
-        FILE_ATTRIBUTE_SYSTEM | FILE_ATTRIBUTE_READONLY,
-        nullptr
-    );
-    if (hFile == INVALID_HANDLE_VALUE)
-    {
-        dw = ::GetLastError();
-        _Analysis_assume_(dw != 0);
-        free(pszSocketFilePathDup);
-        ::closesocket(socket);
-        return HRESULT_FROM_WIN32(dw);
-    }
-    if (!::WriteFile(hFile, buffer, dataSize, &dw, nullptr))
-    {
-        dw = ::GetLastError();
-        _Analysis_assume_(dw != 0);
-        ::CloseHandle(hFile);
-        ::SetFileAttributesW(pszSocketFilePathDup, 0);
-        ::DeleteFileW(pszSocketFilePathDup);
-        free(pszSocketFilePathDup);
-        ::closesocket(socket);
-        return HRESULT_FROM_WIN32(dw);
-    }
-    ::CloseHandle(hFile);
 
     {
         auto hr = InitSocketImpl(socket, pfnOnAccept, callbackData);
@@ -126,6 +75,10 @@ HRESULT CygwinSockFileListener::InitializeSocket(LPCWSTR pszSocketFilePath, PAcc
     }
 
     m_pszSocketFile = pszSocketFilePathDup;
+    if (bIsOverwritten)
+    {
+        AddLogFormatted(LogLevel::Info, L"[cygwin-sock] Socket file existed, but reused because the socket is no longer available. (file: %s)", pszSocketFilePathDup);
+    }
     return S_OK;
 }
 

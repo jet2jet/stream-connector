@@ -23,6 +23,7 @@
 
 #include "../util/event_handler.h"
 #include "../util/functions.h"
+#include "../util/socket.h"
 #include "../util/wsl_util.h"
 
 #include "app.h"
@@ -30,7 +31,6 @@
 #include "window.h"
 
 const Option* g_pOption = nullptr;
-WSADATA g_wsaData = { 0 };
 HINSTANCE g_hInstance = nullptr;
 std::wstring* g_pAppTitle = nullptr;
 HANDLE g_hEventQuit = nullptr;
@@ -558,7 +558,7 @@ void ReportListenersAndConnector(std::wstring& outString)
 
 static bool InitInstance(_In_ HINSTANCE hInstance)
 {
-    if (::WSAStartup(MAKEWORD(2, 2), &g_wsaData) != 0)
+    if (FAILED(InitializeWinsock()))
         return false;
 
     g_hEventQuit = ::CreateEventW(nullptr, TRUE, FALSE, nullptr);
@@ -661,7 +661,7 @@ static void ExitInstance()
         ::CloseHandle(g_hEventQuit);
         g_hEventQuit = nullptr;
     }
-    ::WSACleanup();
+    FinalizeWinsock();
 }
 
 HINSTANCE GetAppInstance()

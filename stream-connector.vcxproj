@@ -242,6 +242,7 @@
     <ClInclude Include="source\proxy\proxy_data.h" />
     <ClInclude Include="source\resource.h" />
     <ClInclude Include="source\targetver.h" />
+    <ClInclude Include="source\util\cygwin.h" />
     <ClInclude Include="source\util\event_handler.h" />
     <ClInclude Include="source\util\functions.h" />
     <ClInclude Include="source\util\socket.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="source\logger\logger.cpp" />
     <ClCompile Include="source\options.cpp" />
     <ClCompile Include="source\proxy\proxy.cpp" />
+    <ClCompile Include="source\util\cygwin.cpp" />
     <ClCompile Include="source\util\event_handler.cpp" />
     <ClCompile Include="source\util\functions.cpp" />
     <ClCompile Include="source\util\socket.cpp" />

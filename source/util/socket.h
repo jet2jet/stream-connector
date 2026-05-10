@@ -1,5 +1,8 @@
 #pragma once
 
+_Check_return_
+HRESULT InitializeWinsock();
+void FinalizeWinsock();
 _Post_satisfies_(FAILED(return))
 HRESULT GetWSAErrorAsHResult(_In_ int result);
 _Post_satisfies_(FAILED(return))

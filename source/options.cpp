@@ -2,6 +2,7 @@
 #include "options.h"
 
 #include "app/simple_dialog.h"
+#include "util/cygwin.h"
 #include "util/functions.h"
 
 #include <stdarg.h>
@@ -100,13 +101,14 @@ static HRESULT CheckAndPrepareFilePath(_Inout_z_ PWSTR pszPath, _Outptr_result_m
             *pszLastPathDelimiter = L'\\';
         }
     }
-    auto curAttr = ::GetFileAttributesW(pszPath);
-    if (curAttr != INVALID_FILE_ATTRIBUTES && (
-        (curAttr & FILE_ATTRIBUTE_READONLY) ||
-        (curAttr & FILE_ATTRIBUTE_DEVICE) ||
-        (curAttr & FILE_ATTRIBUTE_DIRECTORY)
-        ))
+    auto hr = IsWritableAsCygwinSockFile(pszPath);
+    if (FAILED(hr))
     {
+        return hr;
+    }
+    if (hr == S_FALSE)
+    {
+        auto curAttr = ::GetFileAttributesW(pszPath);
         MakeFormattedString(outErrorReason, L"The file seems to be unwritable: '%s' (attr: 0x%08lX)", pszPath, curAttr);
         return E_INVALIDARG;
     }
