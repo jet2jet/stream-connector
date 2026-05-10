@@ -13,7 +13,7 @@ _Use_decl_annotations_
 HRESULT WslTcpSocketConnector::Initialize(PCWSTR pszDistributionName, PCWSTR pszAddress, USHORT port)
 {
     PWSTR pszConnect;
-    auto hr = MakeFormattedString(&pszConnect, L"tcp-connect:'%s':%hu", pszAddress, port);
+    auto hr = MakeFormattedString(&pszConnect, L"tcp:'%s':%hu", pszAddress, port);
     if (FAILED(hr))
         return hr;
     hr = InitializeImpl(pszDistributionName, pszConnect);
