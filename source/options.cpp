@@ -38,10 +38,15 @@ static void ShowHelp(_In_opt_z_ PCWSTR errorReason = nullptr)
         L"\n"
         L"<connector>:\n"
         L"  tcp-socket <address>:<port> : TCP socket connector (port num. cannot be 0)\n"
+        L"    alias for 'tcp-socket': s, sock, socket, tcp\n"
         L"  unix-socket [--abstract] <file-name> : Unix socket connector\n"
+        L"    alias for 'unix-socket': u, unix\n"
         L"  pipe <pipe-name> : Named-pipe connector\n"
+        L"    alias for 'pipe': p\n"
         L"  wsl-tcp-socket [-d <distribution>] <address>:<port> : TCP socket connector in WSL (port num. cannot be 0)\n"
+        L"    alias for 'wsl-tcp-socket': ws, wt\n"
         L"  wsl-unix-socket [-d <distribution>] [--abstract] <wsl-file-path> : Unix socket connector in WSL\n"
+        L"    alias for 'wsl-unix-socket': wu\n"
         ;
     PWSTR pszMessage = nullptr;
     if (errorReason)
